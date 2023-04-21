@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+{% block content %}
+<main>
+    {% csrf_token %}
+
+    <section class="card card-body bg-transparent" id="miau">
+
+        <div class="card card-body bg-transparent">
+            <h1 class="text-center text-light display-3 mb-5 mt-5">
+                Panel de administrador
+            </h1>
+            <h4 class="text-center text-light mb-5"> ¡Bienvenid@ {{ user.first_name }}!</h4>
+        </div>
+
+        <!--ORDENANDO TODO DE NUEVO -->
+            <div class="row">
+
+                <div class="col-12">
+
+                    <div class="row text-center ">
+
+                        <p id="peruvian">
+                            <a class="btn btn-lg btn-outline-light mt-5" href="/solicitudes/create/">
+                                      <i class="bi bi-envelope-plus display-6"></i>
+                            </a>
+                            <a class="btn btn-lg btn-outline-light mt-5" href="/signup/">
+                                      <i class="bi bi-person-plus display-6"></i>
+                            </a>
+
+                            <a class="btn btn-lg btn-outline-light mt-5" href="/tasks/create/">
+                                      <i class="bi bi-plus-lg display-6"></i>
+                            </a>
+
+                            <a class="btn btn-lg btn-outline-light mt-5" href="">
+                                      <i class="bi bi-gear display-6"></i>
+                            </a>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+         <div class="row">
+
+            <div class="col">
+
+  <!-- TODAS LAS SOLICITUDES -->
+
+                <div class="card card-body  mb-3 mt-5">
+
+                    <h2 class="azul mb-5 mt-5 text-center">
+
+                        Todas las solicitudes
+
+                    </h2>
+
+
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar ">
+                        <table
+                                class="table table-borderless table-hover sm table-responsive align-middle "
+                                  >
+                            <thead>
+                                <tr>
+
+                                    <th data-field="requerimiento" scope="col" class="azul">Requerimiento</th>
+                                    <th data-field="comentario" class="azul">Comentario</th>
+                                    <th scope="col" class="azul">Usuario</th>
+                                    <th scope="col" class="azul">Estado</th>
+
+                                </tr>
+                            </thead>
+
+                            {% for solicitud in solicitudes %}
+
+                            <tbody >
+                                <tr>
+                                    <td scope="row" class="text-dark">{{solicitud.requerimiento}}</td>
+                                    <td class="text-dark">{{solicitud.comentario}}</td>
+                                    <td class="text-dark">{{solicitud.user}}</td>
+                                    {% if solicitud.estado == 1 %}
+                                    <td class="text-dark">
+                                        Pendiente
+                                    </td>
+                                    {% endif %}
+                                    {% if solicitud.estado == 2 %}
+                                    <td class="text-dark">
+                                        En proceso
+                                    </td>
+                                    {% endif %}
+                                    {% if solicitud.estado == 3 %}
+                                    <td class="text-dark">
+                                    En espera del cliente
+                                        </td>
+                                    {% endif %}
+                                    {% if solicitud.estado == 4 %}
+                                    <td class="text-dark">
+                                    Resuelto
+                                    </td>
+                                    {% endif %}
+                                </tr>
+                            </tbody>
+                            {% endfor %}
+
+                        </table>
+                    </div>
+
+                </div>
+
+                <!-- FIN SOLICITUDES -->
+            </div>
+
+
+
+             <div class="col">
+
+                <!-- USUARIOS -->
+
+                <div class="card card-body mb-3 mt-5">
+
+                    <h2 class=" mb-5 mt-5 azul text-center">
+
+                        Clientes y ejecutivos
+
+                    </h2>
+                       <table id="datatable_usuarios" class="table table-borderless table-hover  table-responsive">
+                                <thead>
+                                <tr>
+                                    <th scope="col" class="azul">Nombre completo</th>
+                                    <th scope="col" class="azul">Correo electrónico</th>
+                                    <th scope="col" class="azul">Contacto</th>
+                                    <th scope="col" class="azul">Rol</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tableBody_usuarios">
+                            </tbody>
+                        </table>
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+                        <table class="table table-borderless table-hover mb-0 table-responsive">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="azul">Nombre completo</th>
+                                    <th scope="col" class="azul">Correo electrónico</th>
+                                    <th scope="col" class="azul">Contacto</th>
+                                    <th scope="col" class="azul">Rol</th>
+                                </tr>
+                            </thead>
+
+                            {% for user in users %}
+
+                            <tbody>
+                                <tr>
+                                    <th scope="row" class="azul">{{user.first_name}} {{user.last_name}}</th>
+                                    <td class="text-dark">{{user.email}}</td>
+                                    <td class="text-dark">{{user.mobile}}</td>
+                                    {% if user.is_admin %}
+                                    <td class="text-dark">
+                                        Admin
+                                    </td>
+                                    {% endif %}
+                                    {% if user.is_ejecutivo %}
+                                    <td class="text-dark">
+                                        Ejecutivo
+                                    </td>
+                                    {% endif %}
+                                    {% if user.is_cliente %}
+                                    <td class="text-dark">
+                                        Cliente
+                                    </td>
+                                    {% endif %}
+
+                                </tr>
+                            </tbody>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                 <!-- FIN USUARIOS -->
+            </div>
+        </div>
+
+         <!-- REQUERIMIENTOS-->
+
+                <div class="card carddark text-white mb-5 mt-5">
+                    <h2 class="azul mb-5 mt-5 text-center ">
+                        Requerimientos
+
+                    </h2>
+                        <table id="datatable_requerimientos" class="table table-borderless table-hover  table-responsive">
+                                <thead>
+                                <tr>
+                                    <th scope="col" class="centered">#</th>
+                                    <th scope="col" class="centered">Requerimiento</th>
+                                    <th scope="col" class="centered">Categoría</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tableBody_requerimientos">
+                            </tbody>
+                        </table>
+                </div>
+                <!-- FIN REQUERIMIENTOS-->
+        <!--FIN ORDENANDO TODO DE NUEVO -->
+    </section>
+</main>
+
+{% endblock %}

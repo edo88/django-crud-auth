@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block content %}
+<main >
+    {% csrf_token %}
+
+    <section class="card card-body bg-transparent">
+
+        <div class="card card-body bg-transparent">
+            <h1 class="text-center text-light display-3 mb-5 mt-5">
+                Panel de Cliente
+            </h1>
+            <h4 class="text-center text-light mb-5"> ¡Bienvenid@ {{ user.first_name }}!</h4>
+        </div>
+
+        <!--ORDENANDO TODO DE NUEVO -->
+            <div class="row">
+
+
+                <div class="col-12">
+
+                    <div class="row text-center ">
+
+                        <p>
+                            <a class="btn btn-lg btn-outline-light mt-5" href="/solicitudes/create/">
+                                      <i class="bi bi-envelope-plus display-6"></i>
+                            </a>
+
+                            <a class="btn btn-lg btn-outline-light mt-5" href="">
+                                      <i class="bi bi-gear display-6"></i>
+                            </a>
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+         <div class="row">
+
+
+            <div class="col">
+
+  <!-- TODAS LAS SOLICITUDES -->
+ <div class="card card-body  mb-3 mt-5">
+                    <h2 class="azul mb-5 mt-5 text-center">
+
+                        Mis solicitudes
+
+                    </h2>
+
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar ">
+                        <table class="table table-borderless table-hover sm table-responsive align-middle ">
+                            <thead>
+                                <tr>
+
+                                    <th scope="col" class="azul">Requerimiento</th>
+                                    <th scope="col" class="azul">Comentario</th>
+                                    <th scope="col" class="azul">Usuario</th>
+                                    <th scope="col" class="azul">Estado</th>
+
+                                </tr>
+                            </thead>
+
+                            {% for solicitud in solicitudes %}
+
+                            <tbody >
+                                <tr>
+                                    <td scope="row" class="text-dark">{{solicitud.requerimiento}}</td>
+                                    <td class="text-dark">{{solicitud.comentario}}</td>
+                                    <td class="text-dark">{{solicitud.user}}</td>
+                                    {% if solicitud.estado == 1 %}
+                                    <td class="text-dark">
+                                        Pendiente
+                                    </td>
+                                    {% endif %}
+                                    {% if solicitud.estado == 2 %}
+                                    <td class="text-dark">
+                                        En proceso
+                                    </td>
+                                    {% endif %}
+                                    {% if solicitud.estado == 3 %}
+                                    <td class="text-dark">
+                                    En espera del cliente
+                                        </td>
+                                    {% endif %}
+                                    {% if solicitud.estado == 4 %}
+                                    <td class="text-dark">
+                                    Resuelto
+                                    </td>
+                                    {% endif %}
+                                </tr>
+                            </tbody>
+                            {% endfor %}
+
+                        </table>
+                    </div>
+
+                </div>
+
+                <!-- FIN SOLICITUDES -->
+            </div>
+
+
+
+
+
+        </div>
+
+
+        <!--FIN ORDENANDO TODO DE NUEVO -->
+
+
+
+    </section>
+
+
+
+</main>
+{% endblock %}

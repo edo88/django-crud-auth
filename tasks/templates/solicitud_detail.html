@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+  {% block content %}
+<main>
+    <section>
+        <div class="col-md-4 offset-md-4">
+            <h1>{{solicitud.comentario}}</h1>
+                    {{error}}
+                <form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+<button class="btn btn-dark">
+  update
+</button>
+</form>
+<div class="mt-5 d-flex">
+
+<form action= "{% url 'complete_solicitud' solicitud.id %}" method="POST">
+    {% csrf_token %}
+
+    <button class="btn btn-secondary">
+        Complete
+    </button>
+</form>
+
+
+</div>
+        </div>
+    </section>
+</main>
+  {% endblock %}

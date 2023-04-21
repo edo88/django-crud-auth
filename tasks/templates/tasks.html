@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+<main >
+    {% csrf_token %}
+    <section>
+        <h1 class="text-center text-light display-3 mb-5">Requerimientos</h1>
+<div >
+
+<!-- REQUERIMIENTOS-->
+<h2 class="text-light mb-3 mt-5">Requerimientos
+<a class="btn btn-dark " href="/tasks/create/">Añadir Requerimiento</a>
+</h2>
+    <div class="table-wrapper-scroll-y my-custom-scrollbar mb-5">
+
+     <table class="table table-bordered table-striped mb-0">
+  <thead>
+    <tr>
+      <th scope="col" class="text-light">Requerimiento</th>
+      <th scope="col" class="text-light">Categoría</th>
+        <th scope="col" class="text-light">Sub-Categoría</th>
+        <th scope="col" class="text-light">Respuesta</th>
+        <th scope="col" class="text-light">Acciones</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+  {% for task in tasks %}
+    <tr>
+      <th scope="row" class="text-light">{{task.nombre}}</th>
+      <th scope="row" class="text-light">{{task.categoria}}</th>
+      <th scope="row" class="text-light">{{task.subcategoria}}</th>
+        <th scope="row" class="text-light"></th>
+      <td scope="row" class="text-light">
+
+<form action= "{% url 'delete_task' task.id %}" method="POST">
+    {% csrf_token %}
+    <a href="{% url 'task_detail' task.id %}"   class="btn btn-dark">
+            {% csrf_token %}
+
+        Detalle
+    </a>
+    <button class="btn btn-danger">
+        Eliminar
+    </button>
+</form>
+              </td>
+    </tr>
+  {% endfor %}
+
+  </tbody>
+
+</table>
+</div>
+<!-- REQUERIMIENTOS-->
+
+</div>
+{% endblock %}

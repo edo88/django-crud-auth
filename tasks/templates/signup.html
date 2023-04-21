@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main >
+        <section class="card card-body bg-transparent align-items-center">
+            <h1 class="display-3 text-light text-center mb-5 mt-5 ">Crear usuario</h1>
+
+            <form  method="post" class="text-light mb-5 longform ">
+                    {% csrf_token %}
+
+                <div class="row">
+
+                    <div class="col">
+                        <div class="form-group first mt-5 mb-3">
+                    <label for="first_name">Nombre</label>
+                      {{ form.first_name}}
+                  </div>
+
+                  <div class="form-group first mb-3">
+                    <label for="last_name">Apellido</label>
+                      {{ form.last_name}}
+                  </div>
+
+                   <div class="form-group first mb-3">
+                    <label for="mobile">Número de contacto</label>
+                      {{ form.mobile}}
+                  </div>
+
+                   <div class="form-group first mb-3">
+                    <label for="adress">Dirección</label>
+                      {{ form.adress}}
+                  </div>
+
+                  <div class="form-group first mb-3">
+                    <label for="email">Correo electrónico</label>
+                      {{ form.email}}
+                  </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group last mb-4 mt-5">
+                        <label for="password">Contraseña</label>
+                      {{ form.password1 }}
+                  </div>
+                  <div class="form-group last mb-4">
+                    <label for="password">Confirmar Contraseña</label>
+                      {{ form.password2 }}
+                  </div>
+                    <p class="text-color mb-3">Tipo de usuario: </p>
+                  <div class="d-flex mb-5 align-items-center">
+
+                    <label class="control control--checkbox mb-0"><span class="caption">Administrador</span>
+                        {{ form.is_admin }}
+                      <div class="control__indicator"></div>
+                    </label>
+                  </div>
+                  <div class="d-flex mb-5 align-items-center">
+                    <label class="control control--checkbox mb-0"><span class="caption">Ejecutivo</span>
+                        {{ form.is_ejecutivo }}
+                      <div class="control__indicator"></div>
+                    </label>
+                  </div>
+                  <div class="d-flex mb-5 align-items-center">
+                    <label class="control control--checkbox mb-0"><span class="caption">Cliente</span>
+                        {{ form.is_cliente }}
+                      <div class="control__indicator"></div>
+                    </label>
+                  </div>
+                   <!-- <span class="text-error">{{ form.errors }}</span> -->
+                    </div>
+                </div>
+                <input type="submit"  value="Registrar" class="btn btn-pill text-white btn-block btn-dark">
+                </form>
+        </section>
+</main>
+
+  {% endblock %}

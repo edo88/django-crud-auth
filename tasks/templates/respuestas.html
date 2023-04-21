@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<main >
+    {% csrf_token %}
+    <section>
+        <h1 class="text-center text-light display-3 mb-5">Respuestas</h1>
+<div >
+
+<!-- REQUERIMIENTOS-->
+</h2>
+    <div class="table-wrapper-scroll-y my-custom-scrollbar mb-5">
+
+     <table class="table table-bordered table-striped mb-0">
+  <thead>
+    <tr>
+      <th scope="col" class="text-light">Código</th>
+      <th scope="col" class="text-light">Requerimiento</th>
+              <th scope="col" class="text-light">Descripcion</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+  {% for respuesta in respuestas %}
+    <tr>
+      <th scope="row" class="text-light">{{respuesta.code}}</th>
+        <th scope="row" class="text-light">{{respuesta.requerimiento}}</th>
+        <th scope="row" class="text-light">{{respuesta.description}}</th>
+    </tr>
+  {% endfor %}
+
+  </tbody>
+
+</table>
+</div>
+<!-- REQUERIMIENTOS-->
+
+</div>
+{% endblock %}
