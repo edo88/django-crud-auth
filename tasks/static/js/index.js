@@ -1,9 +1,13 @@
-let dataTable;
-let dataTableUsuarios;
 
-let dataTableIsInitialized = false;
-let dataTableUsuariosIsInitialized = false;
-
+document.addEventListener("DOMContentLoaded", function() {
+    let dataTable;
+    let dataTableUsuarios;
+    
+    let dataTableIsInitialized = false;
+    let dataTableUsuariosIsInitialized = false;
+    const tableBody_requerimientos = document.querySelector("#tableBody_requerimientos");
+    const tableBody_usuarios = document.querySelector("#tableBody_usuarios"); // Tu código aquí
+  });
 
 const dataTableOptions={
     columnDefs: [
@@ -23,7 +27,7 @@ const dataTableUsuariosOptions={
     ],
     pageLength: 2,
     destroy: true
-};
+};  
 
 const initDateTable = async()=>{
 if(dataTableIsInitialized){
@@ -86,6 +90,7 @@ const listUsuarios = async () =>{
                 <td>${user.first_name}</td>
                 <td>${user.last_name}</td>
                 <td>${user.email}</td>
+                <td>${user.is_admin}</td>
             </tr>
         `;
         });
