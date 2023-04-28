@@ -1,23 +1,18 @@
-
-document.addEventListener("DOMContentLoaded", function() {
     let dataTable;
     let dataTableUsuarios;
     
     let dataTableIsInitialized = false;
     let dataTableUsuariosIsInitialized = false;
-    const tableBody_requerimientos = document.querySelector("#tableBody_requerimientos");
-    const tableBody_usuarios = document.querySelector("#tableBody_usuarios"); // Tu código aquí
-  });
 
 const dataTableOptions={
     columnDefs: [
     { className: "centered", targets: [0, 1, 2] },
     { orderable: false, targets: [1] },
-    { searchable: true, targets: [1, 2] }
+    { searchable: true, targets: [1, 2] }   
     ],
     pageLength: 2,
-    destroy: true
-};
+    destroy: true   
+};  
 
 const dataTableUsuariosOptions={
     columnDefs: [
@@ -42,14 +37,14 @@ dataTableIsInitialized = true;
 
 };
 
-const initDateTableUsuarios = async()=>{
+const initDateTableUsuarios = async () => {
 if(dataTableUsuariosIsInitialized){
     dataTableUsuarios.destroy();
 }
 
 await listUsuarios();
 
-dataTable=$('#datatable_usuarios').DataTable(dataTableUsuariosOptions);
+dataTableUsuarios=$('#datatable_usuarios').DataTable(dataTableUsuariosOptions);
 
 dataTableUsuariosIsInitialized = true;
 
@@ -90,7 +85,6 @@ const listUsuarios = async () =>{
                 <td>${user.first_name}</td>
                 <td>${user.last_name}</td>
                 <td>${user.email}</td>
-                <td>${user.is_admin}</td>
             </tr>
         `;
         });
