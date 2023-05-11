@@ -11,6 +11,7 @@ urlpatterns = [
     path('respuestas/', views.respuestas, name='respuestas'),
     path('list_tasks/', views.list_tasks, name='list_tasks'),
     path('list_usuarios/', views.list_usuarios, name='list_usuarios'),
+    path('list_solicitudes/', views.list_solicitudes, name='list_solicitudes'),
 
     path('dashboard_admin/', views.dashboard_admin, name='dashboard_admin'),
     path('dashboard_ejecutivo/', views.dashboard_ejecutivo, name='dashboard_ejecutivo'),

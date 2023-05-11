@@ -74,6 +74,7 @@ class SignUpForm(UserCreationForm):
         fields =('email', 'password1', 'password2', 'first_name', 'last_name',
                      'mobile', 'adress', 'is_admin', 'is_ejecutivo', 'is_cliente')
 
+
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task

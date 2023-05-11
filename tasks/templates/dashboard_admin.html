@@ -1,4 +1,7 @@
-{% extends 'base.html' %} {% block content %}
+
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %}
 <main>
   {% csrf_token %}
 
@@ -41,8 +44,26 @@
 
     <div class="row">
       <div class="col">
+        <div class="card carddark text-white mb-5 mt-5">
+          <h2 class="azul mb-5 mt-5 text-center">Solicitudes</h2>
+          <table
+            id="datatable_solicitudes"
+            class="table table-borderless table-hover table-responsive"
+          >
+            <thead>
+              <tr>
+                <th scope="col" class="centered">#</th>
+                <th scope="col" class="centered">Comentario</th>
+                <th scope="col" class="centered">Usuario </th>
+                <th scope="col" class="centered">requerimiento </th>
+v
+              </tr>
+            </thead>
+            <tbody id="tableBody_solicitudes"></tbody>
+          </table>
+        </div>
         <!-- TODAS LAS SOLICITUDES -->
-
+<!--
         <div class="card card-body mb-3 mt-5">
           <h2 class="azul mb-5 mt-5 text-center">Todas las solicitudes</h2>
 
@@ -85,7 +106,7 @@
             </table>
           </div>
         </div>
-
+-->
         <!-- FIN SOLICITUDES -->
       </div>
 
@@ -163,15 +184,22 @@
             <th scope="col" class="centered">#</th>
             <th scope="col" class="centered">Requerimiento</th>
             <th scope="col" class="centered">Categoría</th>
+            <th scope="col" class="centered">Subcategoria</th>
           </tr>
         </thead>
-
         <tbody id="tableBody_requerimientos"></tbody>
       </table>
     </div>
+      
+    
     <!-- FIN REQUERIMIENTOS-->
     <!--FIN ORDENANDO TODO DE NUEVO -->
   </section>
 </main>
 
+{% endblock %}
+<!-- dashboard_admin.html -->
+
+{% block scripts %}
+    <script src="{% static 'js/index.js' %}"></script>
 {% endblock %}
