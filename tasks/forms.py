@@ -69,6 +69,10 @@ class SignUpForm(UserCreationForm):
             }
         )
     )
+    is_admin = forms.BooleanField(required=False)
+    is_ejecutivo = forms.BooleanField(required=False)
+    is_cliente = forms.BooleanField(required=False)
+
     class Meta:
         model = User
         fields =('email', 'password1', 'password2', 'first_name', 'last_name',

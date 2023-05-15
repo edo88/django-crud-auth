@@ -290,6 +290,43 @@ def signin(request):
 
 def register(request):
     if request.method == 'GET':
+        form = SignUpForm()
+        return render(request, 'signup.html', {'form': form})
+    else:
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            if form.cleaned_data['password1'] == form.cleaned_data['password2']:
+                try:
+                    user = User.objects.create_user(
+                        email=form.cleaned_data['email'],
+                        password=form.cleaned_data['password1'],
+                        first_name=form.cleaned_data['first_name'],
+                        last_name=form.cleaned_data['last_name'],
+                        mobile=form.cleaned_data['mobile'],
+                        adress=form.cleaned_data['adress'],
+                    )
+                    user.is_admin = form.cleaned_data['is_admin']
+                    user.is_ejecutivo = form.cleaned_data['is_ejecutivo']
+                    user.is_cliente = form.cleaned_data['is_cliente']
+                    user.save()
+                    login(request, user)
+                    return redirect('dashboard_admin')
+                except IntegrityError:
+                    return render(request, 'signup.html', {
+                        'form': form,
+                        "error": 'El usuario ya existe'
+                    })
+            else:
+                return render(request, 'signup.html', {
+                    'form': form,
+                    "error": 'La contraseña no es correcta'
+                })
+        else:
+            return render(request, 'signup.html', {'form': form})
+
+"""
+def register(request):
+    if request.method == 'GET':
         return render(request, 'signup.html', {
             'form': SignUpForm(request.POST)
         })
@@ -310,11 +347,11 @@ def register(request):
                 return render(request, 'signup.html', {
                     'form': SignUpForm(request.POST),
                     "error": 'El usuario ya existe'
-                })
+                })  
         return render(request, 'signup.html', {
             'form': SignUpForm(request.POST),
             "error": 'La contraseña no es correcta'
-        })
+        }) """
 
 def login_view(request):
     form = LoginForm(request.POST or None)
