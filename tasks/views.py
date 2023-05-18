@@ -37,11 +37,13 @@ def signup(request):
 def tasks(request):
     tasks = Task.objects.filter(user=request.user)
     return render(request, 'tasks.html', {'tasks' : tasks})
+
 #Respuestas
 @login_required
 def respuestas(request):
     respuestas = Respuesta.objects.filter()
     return render(request, 'respuestas.html', {'respuestas' : respuestas})
+
 #Dashboard Admin
 def dashboard_admin(request):
     tasks = Task.objects.filter()
@@ -106,13 +108,13 @@ def list_solicitudes(_request):
     data = {'solicitudes' : solicitud_list}
     return JsonResponse(data)
 
+
+
 #Lista de Usuarios devuelve un JSON para insertar datos en tablas mediante JavasCript
 def list_usuarios(_request):
     users = list(User.objects.values())
     data = {'users' : users}
     return JsonResponse(data)
-
-
 
 #dashboard cliente
 def dashboard_cliente(request):
@@ -134,6 +136,7 @@ def dashboard_cliente(request):
 def solicitudes(request):
     solicitudes = Solicitud.objects.filter(user=request.user)
     return render(request, 'solicitudes.html', {'solicitudes' : solicitudes})
+
 #requerimientos completados
 @login_required
 def tasks_completed(request):
@@ -378,3 +381,9 @@ def subcategorias_por_categoria(request):
     subcategorias_data = [{'id': sc.id, 'title': sc.title} for sc in subcategorias]
 
     return JsonResponse({'subcategorias': subcategorias_data})
+
+def obtener_subcategorias(request):
+    categoria_id = request.GET.get('categoria')
+    subcategorias = Subcategoria.objects.filter(categoria_id=categoria_id)
+    data = [{'id': subcategoria.id, 'nombre': subcategoria.title} for subcategoria in subcategorias]
+    return JsonResponse(data, safe=False)

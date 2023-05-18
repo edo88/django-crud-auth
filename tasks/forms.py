@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from .models import Task, Solicitud, User
+from .models import Categoria, Task, Solicitud, User, Subcategoria
 
 class LoginForm(forms.Form):
     email = forms.CharField(
@@ -80,6 +80,8 @@ class SignUpForm(UserCreationForm):
 
 
 class TaskForm(forms.ModelForm):
+    categoria = forms.ModelChoiceField(queryset=Categoria.objects.all(), widget=forms.Select(attrs={'id': 'id_categoria', 'data-url': '/obtener_subcategorias/'}))
+
     class Meta:
         model = Task
         fields = ['nombre', 'categoria', 'subcategoria', 'complejidad']

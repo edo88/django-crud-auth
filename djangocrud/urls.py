@@ -19,6 +19,7 @@ urlpatterns = [
     path('solicitudes/', views.solicitudes, name='solicitudes'),
 
     path('tasks/create/', views.create_task, name='create_task'),
+    path('obtener_subcategorias/', views.obtener_subcategorias, name='obtener_subcategorias'),
     path('solicitudes/create/', views.create_solicitud, name='create_solicitud'),
 
     path('tasks_completed/', views.tasks_completed, name='tasks_completed'),

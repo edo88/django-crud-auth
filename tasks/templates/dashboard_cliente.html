@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %}{% load static %}
 {% block content %}
 <main >
     {% csrf_token %}
@@ -14,12 +14,8 @@
 
         <!--ORDENANDO TODO DE NUEVO -->
             <div class="row">
-
-
                 <div class="col-12">
-
                     <div class="row text-center ">
-
                         <p>
                             <a class="btn btn-lg btn-outline-light mt-5" href="/solicitudes/create/">
                                       <i class="bi bi-envelope-plus display-6"></i>
@@ -43,61 +39,33 @@
             <div class="col">
 
   <!-- TODAS LAS SOLICITUDES -->
- <div class="card card-body  mb-3 mt-5">
-                    <h2 class="azul mb-5 mt-5 text-center">
+  <div class="row">
+    <div class="col">
+      <!-- TODAS LAS SOLICITUDES -->
+      <div class="row">
+        <div class="col">
+          <div class="card carddark text-white mb-5 mt-5">
+            <h2 class="azul mb-5 mt-5 text-center">Solicitudes</h2>
+            <table
+              id="datatable_solicitudes"
+              class="table table-borderless table-hover table-responsive"
+            >
+              <thead>
+                <tr>
+                  <th scope="col" class="centered">#</th>
+                  <th scope="col" class="centered">Comentario</th>
+                  <th scope="col" class="centered">Usuario </th>
+                  <th scope="col" class="centered">Requerimiento </th>
+  v
+                </tr>
+              </thead>
+              <tbody id="tableBody_solicitudes"></tbody>
+            </table>
+          </div>
 
-                        Mis solicitudes
-
-                    </h2>
-
-                    <div class="table-wrapper-scroll-y my-custom-scrollbar ">
-                        <table class="table table-borderless table-hover sm table-responsive align-middle ">
-                            <thead>
-                                <tr>
-
-                                    <th scope="col" class="azul">Requerimiento</th>
-                                    <th scope="col" class="azul">Comentario</th>
-                                    <th scope="col" class="azul">Usuario</th>
-                                    <th scope="col" class="azul">Estado</th>
-
-                                </tr>
-                            </thead>
-
-                            {% for solicitud in solicitudes %}
-
-                            <tbody >
-                                <tr>
-                                    <td scope="row" class="text-dark">{{solicitud.requerimiento}}</td>
-                                    <td class="text-dark">{{solicitud.comentario}}</td>
-                                    <td class="text-dark">{{solicitud.user}}</td>
-                                    {% if solicitud.estado == 1 %}
-                                    <td class="text-dark">
-                                        Pendiente
-                                    </td>
-                                    {% endif %}
-                                    {% if solicitud.estado == 2 %}
-                                    <td class="text-dark">
-                                        En proceso
-                                    </td>
-                                    {% endif %}
-                                    {% if solicitud.estado == 3 %}
-                                    <td class="text-dark">
-                                    En espera del cliente
-                                        </td>
-                                    {% endif %}
-                                    {% if solicitud.estado == 4 %}
-                                    <td class="text-dark">
-                                    Resuelto
-                                    </td>
-                                    {% endif %}
-                                </tr>
-                            </tbody>
-                            {% endfor %}
-
-                        </table>
-                    </div>
-
-                </div>
+      <!-- FIN SOLICITUDES -->
+    </div>
+  </div>
 
                 <!-- FIN SOLICITUDES -->
             </div>
@@ -118,4 +86,6 @@
 
 
 </main>
+{% endblock %}{% block scripts %}
+<script src="{% static 'js/index_cliente.js' %}"></script>
 {% endblock %}

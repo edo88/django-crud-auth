@@ -82,7 +82,8 @@ const initDateTableSolicitudes = async () => {
 
 const listTasks = async () =>{
     try{
-        const response = await fetch("http://127.0.0.1:8000/list_tasks");
+        const response = await fetch("https://conta-smart.onrender.com//list_tasks");
+        
         const data = await response.json();
 
         let content = ``;
@@ -105,7 +106,7 @@ const listTasks = async () =>{
 
 const listUsuarios = async () =>{
     try{
-        const response = await fetch("http://127.0.0.1:8000/list_usuarios");
+        const response = await fetch("https://conta-smart.onrender.com/list_usuarios");
         const data = await response.json();
 
         let content = ``;
@@ -128,7 +129,7 @@ const listUsuarios = async () =>{
 
 const listSolicitudes = async () =>{
     try{
-        const response = await fetch("http://127.0.0.1:8000/list_solicitudes");
+        const response = await fetch("https://conta-smart.onrender.com/list_solicitudes");
         const data = await response.json();
 
         let content = ``;
